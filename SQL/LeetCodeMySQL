@@ -1,10 +1,29 @@
 Question 1: Find Customer Referee
-Link : https://leetcode.com/problems/find-customer-referee/
+Link      : https://leetcode.com/problems/find-customer-referee/
 
-The above problem is an example that shows that a NULL value in SQL cannot be compared with any Values even another Null because if we compare 
-               -- Null with anything results in NULL (i.e False)
-               
-Example: if we use WHERE Marks < 2 expecting NULL to show up in output , **BUMMER** it wont show up.
-
+            The above problem is an example that shows that a NULL value in SQL cannot be compared with any Values even another Null because if we compare 
+            -- Null with anything results in NULL (i.e False)
+                
+            Example: if we use WHERE Marks < 2 expecting NULL to show up in output , **BUMMER** it wont show up.
+            
+WEIRD Sol : SELECT name
+            FROM Customer
+            WHERE id NOT IN
+            (
+            SELECT id
+            FROM Customer
+            WHERE referee_id = 2
+            )
+         
+          : SELECT name
+            FROM customer
+            WHERE IFNULL(referee_id, 0) <> 2
+            
+          : SELECT name
+            FROM customer
+            WHERE COALESCE(referee_id, 0) <> 2
+            
+FEW TERMS : 1)IFNULL(,)      
+            2)COALESCE(,)
 __________________________________________________________________________________________________________________________________________________________________________
 
